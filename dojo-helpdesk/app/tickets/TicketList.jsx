@@ -9,8 +9,7 @@ export default async function TicketList() {
 
   return (
     <>
-      {console.log(tickets)}
-      {tickets.map((ticket) => {
+      {tickets.map((ticket) => (
         <div key={ticket.id} className="card my-5">
           <h3>{ticket.title}</h3>
           <p>{ticket.body.slice(0, 200)}...</p>
@@ -18,7 +17,7 @@ export default async function TicketList() {
             {ticket.priority} priority
           </div>
         </div>
-      })}
+      ))}
       {tickets.length === 0 && (
         <p className="text-center">There are no open tickets</p>
       )}
