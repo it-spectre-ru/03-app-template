@@ -10,7 +10,6 @@ async function getTicket(id) {
 
 export default async function TicketDetails({ params }) {
   const ticket = await getTicket(params.id)
-  console.log(ticket)
   return (
     <main>
       <nav>
