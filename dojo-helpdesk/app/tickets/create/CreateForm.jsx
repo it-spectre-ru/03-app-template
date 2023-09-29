@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function CreateForm() {
@@ -11,8 +11,26 @@ export default function CreateForm() {
   const [priority, setPriority] = useState('low')
   const [isLoading, setIsLoading] = useState(false)
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    const newTicket = { title, body, priority, user_email: 'mario@netninja.dev' }
+
+    const res = await fetch('http://localhost:4000/tickets', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTicket)
+    })
+
+    if (res.status === 201) {
+      router.refresh()
+      router.push('/tickets')
+    }
+  }
+
   return (
-    <form className="w-1/2">
+    <form onSubmit={handleSubmit} className="w-1/2">
       <label>
         <span>Title:</span>
         <input
@@ -23,7 +41,7 @@ export default function CreateForm() {
         />
       </label>
       <label>
-        <span>Body:</span>
+        <span>Title:</span>
         <textarea
           required
           onChange={(e) => setBody(e.target.value)}
