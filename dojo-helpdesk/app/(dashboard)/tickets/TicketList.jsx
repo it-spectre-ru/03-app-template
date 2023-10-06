@@ -1,11 +1,9 @@
 import Link from "next/link"
-import { resolve } from "styled-jsx/css"
 
 async function getTickets() {
-
   const res = await fetch('http://localhost:4000/tickets', {
     next: {
-      revalidate: 0
+      revalidate: 0 // use 0 to opt out of using cache
     }
   })
 
@@ -26,13 +24,11 @@ export default async function TicketList() {
               {ticket.priority} priority
             </div>
           </Link>
-
         </div>
       ))}
       {tickets.length === 0 && (
-        <p className="text-center">There are no open tickets</p>
+        <p className="text-center">There are no open tickets, yay!</p>
       )}
-
     </>
   )
 }

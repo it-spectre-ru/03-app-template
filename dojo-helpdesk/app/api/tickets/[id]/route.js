@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server"
 
-export const dynamic = 'force-dynamic'
-
 export async function GET(_, { params }) {
   const id = params.id
 
@@ -9,7 +7,7 @@ export async function GET(_, { params }) {
   const ticket = await res.json()
 
   if (!res.ok) {
-    return NextResponse.json({ error: 'Cannot find the ticket' }, {
+    return NextResponse.json({error: 'Cannot find ticket'}, {
       status: 404
     })
   }
