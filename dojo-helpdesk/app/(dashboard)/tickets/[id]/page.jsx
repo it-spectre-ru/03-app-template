@@ -10,7 +10,7 @@ export const dynamicParams = true
 export async function generateMetadata({ params }) {
   const supabase = createServerComponentClient({ cookies })
 
-  const { data: ticket } = await supabase.from('tickets')
+  const { data: ticket } = await supabase.from('Tickets')
     .select()
     .eq('id', params.id)
     .single()
@@ -23,16 +23,16 @@ export async function generateMetadata({ params }) {
 async function getTicket(id) {
   const supabase = createServerComponentClient({ cookies })
 
-  const { data } = await supabase.from('tickets')
+  const { data } = await supabase.from('Tickets')
     .select()
     .eq('id', id)
     .single()
 
-    if (!data) {
-      notFound()
-    }
-  
-    return data
+  if (!data) {
+    notFound()
+  }
+
+  return data
 }
 
 export default async function TicketDetails({ params }) {
