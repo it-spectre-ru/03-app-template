@@ -5,7 +5,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 async function getTickets() {
   const supabase = createServerComponentClient({ cookies })
 
-  const { data, error } = await supabase.from('tickets')
+  const { data, error } = await supabase.from("Tickets")
     .select()
 
   if (error) {
