@@ -11,22 +11,24 @@ export default function CreateForm() {
   const [priority, setPriority] = useState('low')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = async (e)  => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
 
-    const newTicket = { title, body, priority, user_email: 'mario@netninja.dev' }
+    const newTicket = { title, body, priority }
 
     const res = await fetch('http://localhost:3000/api/tickets', {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTicket)
     })
 
+
+    //----
     const json = await res.json()
 
     if (json.error) {
-      console.log(error.message)
+      console.log(json.error.message)
     }
     if (json.data) {
       router.refresh()
@@ -39,7 +41,7 @@ export default function CreateForm() {
       <label>
         <span>Title:</span>
         <input
-          required 
+          required
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
@@ -55,7 +57,7 @@ export default function CreateForm() {
       </label>
       <label>
         <span>Priority:</span>
-        <select 
+        <select
           onChange={(e) => setPriority(e.target.value)}
           value={priority}
         >
@@ -64,13 +66,13 @@ export default function CreateForm() {
           <option value="high">High Priority</option>
         </select>
       </label>
-      <button 
-        className="btn-primary" 
+      <button
+        className="btn-primary"
         disabled={isLoading}
       >
-      {isLoading && <span>Adding...</span>}
-      {!isLoading && <span>Add Ticket</span>}
-    </button>
+        {isLoading && <span>Adding...</span>}
+        {!isLoading && <span>Add Ticket</span>}
+      </button>
     </form>
   )
 }
