@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { addTicket } from "../actions"
 
@@ -11,16 +10,16 @@ export default function CreateForm() {
       <label>
         <span>Title:</span>
         <input
-          name="title"
           required
           type="text"
+          name="title"
         />
       </label>
       <label>
         <span>Body:</span>
         <textarea
-          name="body"
           required
+          name="body"
         />
       </label>
       <label>
